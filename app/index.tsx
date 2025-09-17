@@ -10,24 +10,31 @@ export default function Index() {
 
   useEffect(() => {
     const checkInitialMoney = async () => {
-      const money = await AsyncStorage.getItem("initialMoney");
-      if (money) {
-        router.replace("/(tabs)/Main"); // Đã có tiền ban đầu → vào Main
-      } else {
-        router.replace("/OnBoardingScreen"); // Chưa có → vào Onboarding
+      try {
+        const money = await AsyncStorage.getItem("initialMoney");
+        if (money) {
+          router.replace("../(tabs)/Main"); // Có dữ liệu → vào Main
+        } else {
+          router.replace("../OnBoardingScreen"); // Không có → vào Onboarding
+        }
+      } catch (error) {
+        console.error("Lỗi khi kiểm tra dữ liệu:", error);
+        router.replace("../OnBoardingScreen"); // Sai thì vào Onboarding
+      } finally {
+        setLoading(false);
       }
-      setLoading(false);
     };
+
     checkInitialMoney();
   }, []);
 
   if (loading) {
     return (
       <View style={{ flex: 1, justifyContent: "center", alignItems: "center" }}>
-        <ActivityIndicator size="large" />
+        <ActivityIndicator size="large" color="#FF9800" />
       </View>
     );
   }
 
-  return null; // không render gì cả, vì sẽ redirect
+  return null; // Không render gì cả, vì đã redirect
 }

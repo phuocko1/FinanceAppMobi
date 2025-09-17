@@ -1,22 +1,29 @@
 // app/styles/MainScreenStyles.ts
-import { StyleSheet } from 'react-native';
+import { Dimensions, StyleSheet } from 'react-native';
+
+const { width, height } = Dimensions.get('window');
+
+// Hàm scale theo chiều ngang
+const scale = (size: number) => (width / 375) * size; 
+// 375 = width chuẩn iPhone 11 → lấy làm chuẩn scale
+
 const MainScreenStyles = StyleSheet.create({
   container: {
     flex: 1,
     backgroundColor: '#fff',
-    padding: 16,
+    padding: scale(16),
   },
   header: {
     flexDirection: 'row',
     alignItems: 'center',
     justifyContent: 'center',
-    marginBottom: 16,
-    gap: 12,
+    marginBottom: scale(16),
+    gap: scale(12),
   },
   tabButton: {
     flex: 1,
-    paddingVertical: 12,
-    borderRadius: 12,
+    paddingVertical: scale(12),
+    borderRadius: scale(12),
     alignItems: 'center',
     borderWidth: 1,
   },
@@ -29,23 +36,20 @@ const MainScreenStyles = StyleSheet.create({
     borderColor: '#ddd',
   },
   tabText: {
-    fontSize: 16,
+    fontSize: scale(16),
     fontWeight: '600',
   },
-  tabTextActive: {
-    color: '#fff',
-  },
-  tabTextInactive: {
-    color: '#555',
-  },
+  tabTextActive: { color: '#fff' },
+  tabTextInactive: { color: '#555' },
+
   dateRow: {
     flexDirection: 'row',
     alignItems: 'center',
-    marginBottom: 16,
+    marginBottom: scale(16),
   },
   label: {
-    width: 80,
-    fontSize: 16,
+    width: scale(80),
+    fontSize: scale(16),
     fontWeight: '500',
     color: '#333',
   },
@@ -54,28 +58,24 @@ const MainScreenStyles = StyleSheet.create({
     flexDirection: 'row',
     alignItems: 'center',
     justifyContent: 'space-between',
-    padding: 12,
+    padding: scale(12),
     borderWidth: 1,
     borderColor: '#ddd',
-    borderRadius: 8,
+    borderRadius: scale(8),
     backgroundColor: '#fff',
   },
-  arrowButton: {
-    padding: 4,
-  },
-  dateText: {
-    fontSize: 16,
-    color: '#333',
-  },
+  arrowButton: { padding: scale(4) },
+  dateText: { fontSize: scale(16), color: '#333' },
+
   input: {
     flex: 1,
-    height: 40,
+    height: scale(40),
     borderWidth: 1,
     borderColor: '#ddd',
-    borderRadius: 8,
-    paddingHorizontal: 15,
-    paddingVertical: 10,
-    fontSize: 16,
+    borderRadius: scale(8),
+    paddingHorizontal: scale(15),
+    paddingVertical: scale(10),
+    fontSize: scale(16),
   },
   amountContainer: {
     flexDirection: 'row',
@@ -83,43 +83,39 @@ const MainScreenStyles = StyleSheet.create({
     flex: 1,
     borderWidth: 1,
     borderColor: '#ddd',
-    borderRadius: 8,
+    borderRadius: scale(8),
     backgroundColor: '#fff',
-    paddingHorizontal: 12,
-    paddingVertical: 8,
+    paddingHorizontal: scale(12),
+    paddingVertical: scale(8),
   },
   amountInput: {
     flex: 1,
-    fontSize: 16,
+    fontSize: scale(16),
     textAlign: 'right',
   },
-  currency: {
-    fontSize: 16,
-    color: '#666',
-  },
-  categorySection: {
-    marginTop: 10,
-  },
+  currency: { fontSize: scale(16), color: '#666' },
+
+  categorySection: { marginTop: scale(10) },
   sectionTitle: {
-    fontSize: 16,
+    fontSize: scale(16),
     fontWeight: '600',
     color: '#333',
-    marginBottom: 12,
+    marginBottom: scale(12),
     textAlign: 'left',
   },
   categoryGrid: {
     flexDirection: 'row',
     flexWrap: 'wrap',
-    gap: 12,
+    gap: scale(12),
   },
   categoryButton: {
-    width: '30%',
-    padding: 12,
+    width: (width - scale(64)) / 3, // chia 3 cột auto fit màn hình
+    padding: scale(12),
     alignItems: 'center',
     justifyContent: 'center',
     borderWidth: 1,
     borderColor: '#ddd',
-    borderRadius: 8,
+    borderRadius: scale(8),
     backgroundColor: '#fff',
   },
   selectedCategory: {
@@ -127,29 +123,30 @@ const MainScreenStyles = StyleSheet.create({
     backgroundColor: '#FFF8E1',
   },
   categoryLabel: {
-    fontSize: 14,
+    fontSize: scale(14),
     fontWeight: '600',
     textAlign: 'center',
     color: '#333',
-    marginTop: 6,
+    marginTop: scale(6),
   },
   submitButton: {
-    marginTop: 30,
+    marginTop: scale(30),
     backgroundColor: '#FF9800',
-    padding: 16,
-    borderRadius: 12,
+    padding: scale(16),
+    borderRadius: scale(12),
     alignItems: 'center',
-    marginBottom: 80,
+    marginBottom: scale(80),
   },
   submitButtonText: {
     color: '#fff',
-    fontSize: 18,
+    fontSize: scale(18),
     fontWeight: '600',
   },
   row: {
     flexDirection: 'row',
     alignItems: 'center',
-    marginBottom: 16,
+    marginBottom: scale(16),
   },
 });
+
 export default MainScreenStyles;

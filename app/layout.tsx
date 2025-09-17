@@ -5,16 +5,16 @@ import React, { useEffect, useState } from "react";
 import { ActivityIndicator, View } from "react-native";
 
 export default function RootLayout() {
-  const [appReady, setAppReady] = useState(false);
   const [isOnboardingDone, setIsOnboardingDone] = useState(false);
+  const [appReady, setAppReady] = useState(false);
 
   useEffect(() => {
     const checkOnboarding = async () => {
       try {
-        const balance = await AsyncStorage.getItem("initialBalance");
-        setIsOnboardingDone(!!balance); // true nếu có số dư
+        const balance = await AsyncStorage.getItem("initialMoney");
+        setIsOnboardingDone(!!balance);
       } catch (error) {
-        console.error("Lỗi kiểm tra Onboarding:", error);
+        console.error("Lỗi kiểm tra onboarding:", error);
         setIsOnboardingDone(false);
       } finally {
         setAppReady(true);

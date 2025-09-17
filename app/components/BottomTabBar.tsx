@@ -1,10 +1,10 @@
 // components/BottomTabBar.tsx
 import React from "react";
 import {
-    StyleSheet,
-    Text,
-    TouchableOpacity,
-    View,
+  StyleSheet,
+  Text,
+  TouchableOpacity,
+  View,
 } from "react-native";
 import Icon from "react-native-vector-icons/MaterialIcons";
 
@@ -50,13 +50,15 @@ const styles = StyleSheet.create({
     borderTopWidth: 1,
     borderTopColor: "#eee",
     backgroundColor: "#fff",
+
     shadowColor: "#000",
     shadowOffset: { width: 0, height: -2 },
     shadowOpacity: 0.1,
     shadowRadius: 4,
     elevation: 5,
-    position: "absolute",
-    bottom: 15,
+
+    position: "absolute",   // giữ cố định
+    bottom: 0,              // dính sát mép dưới
     left: 0,
     right: 0,
   },

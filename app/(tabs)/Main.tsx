@@ -1,5 +1,6 @@
 // src/screens/Main.tsx
-import React, { useEffect, useState } from 'react';
+import { useLocalSearchParams } from 'expo-router'; // ✅ thay thế cho route.params
+import React, { useState } from 'react';
 import {
   ScrollView,
   Text,
@@ -8,35 +9,32 @@ import {
   View,
 } from 'react-native';
 import Icon from 'react-native-vector-icons/MaterialIcons';
-import BottomBar from '../components/BottomTabBar';
-import MainScreenStyles from '../styles/MainScreenStyles';
 import {
   expenseCategories,
   handleCategoryPress,
   incomeCategories,
-} from '../utils/Category';
+} from '../../src/utils/Category';
 import {
   formatDay,
   formatNumber,
   goToNextDay,
   goToPreviousDay,
-} from '../utils/FormatUtils';
+} from '../../src/utils/FormatUtils';
+import BottomBar from '../components/BottomTabBar';
+import MainScreenStyles from '../styles/MainScreenStyles';
 
-const Main = ({ route }: any) => {
+const Main = () => {
+  const { initialBalance } = useLocalSearchParams<{ initialBalance?: string }>();
+
   const [isIncome, setIsIncome] = useState(false);
   const [note, setNote] = useState('');
   const [amount, setAmount] = useState('0');
   const [selectedCategory, setSelectedCategory] = useState<string | null>(null);
   const [activeTab, setActiveTab] = useState<'needs' | 'wants' | 'save'>('needs');
   const [currentDate, setCurrentDate] = useState(new Date());
-  const [initialBalance, setInitialBalance] = useState<number>(0);
+  const [balance, setBalance] = useState<number>(0);
 
-  // Lấy số dư ban đầu từ route
-  useEffect(() => {
-    if (route.params?.initialBalance) {
-      setInitialBalance(route.params.initialBalance);
-    }
-  }, [route.params]);
+
 
   const handleChangeAmount = (val: string) => {
     const formatted = formatNumber(val);
@@ -55,14 +53,10 @@ const Main = ({ route }: any) => {
   const currentCategories = expenseCategories[activeTab];
 
   return (
-    <View style={{ flex: 1 }}>
+    <View style={{ flex: 1 , paddingTop :10}}>
       <ScrollView style={MainScreenStyles.container}>
         {/* Header: Hiển thị số dư ban đầu */}
-        <View style={[MainScreenStyles.header, { marginTop: 0 }]}>
-          <Text style={[MainScreenStyles.tabText, { fontSize: 16, fontWeight: '600' }]}>
-            Số dư ban đầu: {formatNumber(initialBalance.toString())} đ
-          </Text>
-        </View>
+
 
         {/* Tiêu đề: Tiền chi / Tiền thu */}
         <View style={[MainScreenStyles.header, { marginTop: 10 }]}>

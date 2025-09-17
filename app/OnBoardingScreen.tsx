@@ -1,3 +1,4 @@
+// app/OnBoardingScreen.tsx
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import { useRouter } from "expo-router";
 import React, { useEffect, useState } from "react";
@@ -47,13 +48,13 @@ export default function OnBoardingScreen() {
   }, []);
 
   const handleSave = async () => {
-    if (!amount) {
+    if (!amount.trim()) {
       alert("Vui lòng nhập số tiền hiện có");
       return;
     }
     try {
       await AsyncStorage.setItem("initialMoney", amount);
-      router.replace("/(tabs)/Main");
+      router.replace("/Main");
     } catch (error) {
       console.error("Lỗi lưu số tiền:", error);
     }
@@ -69,18 +70,17 @@ export default function OnBoardingScreen() {
         value={amount}
         onChangeText={setAmount}
         placeholder="0"
-        returnKeyType="done" // Hiển thị nút "Done" trên bàn phím (iOS/Android)
-        onSubmitEditing={handleSave} // Gọi khi nhấn "Done" trên bàn phím
+        returnKeyType="done"
+        onSubmitEditing={handleSave}
       />
 
-      {/* Nút "Hoàn thành" — dán sát trên bàn phím, không viền, không bóng thừa */}
       {isKeyboardVisible && (
         <View
           style={[
             styles.accessory,
             {
-              bottom: 0, // DÍNH SÁT DƯỚI CÙNG — NGAY TRÊN BÀN PHÍM
-              height: 48, // Chiều cao chuẩn của thanh toolbar iOS
+              bottom: 0,
+              height: 48,
             },
           ]}
         >
@@ -116,11 +116,10 @@ const styles = StyleSheet.create({
     position: "absolute",
     left: 0,
     right: 0,
-    backgroundColor: "#f0f0f0", // Màu giống bàn phím iOS
+    backgroundColor: "#f0f0f0",
     justifyContent: "center",
     alignItems: "center",
     borderTopWidth: 1,
     borderTopColor: "#ccc",
-    // Không dùng shadow/elevation để trông như một phần của bàn phím
   },
 });
