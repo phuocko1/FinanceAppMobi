@@ -1,5 +1,4 @@
 // utils/Category.ts
-// utils/Category.ts
 export const handleCategoryPress = (
   categoryId: string,
   setSelectedCategory: (id: string) => void
@@ -10,12 +9,12 @@ export const handleCategoryPress = (
 // Danh mục tiền thu
 export const incomeCategories = [
   { id: 'salary', label: 'Tiền lương', icon: 'attach-money', color: '#4CAF50' },
-  { id: 'allowance', label: 'Tiền phụ cấp', icon: 'local-grocery-store', color: '#FF9800' },
-  { id: 'bonus', label: 'Tiền thưởng', icon: 'card-giftcard', color: '#F44336' },
-  { id: 'side_income', label: 'Thu nhập phụ', icon: 'account-balance', color: '#2196F3' },
-  { id: 'investment', label: 'Đầu tư', icon: 'trending-up', color: '#9C27B0' },
-  { id: 'other_income', label: 'Thu nhập tạm...', icon: 'group', color: '#E91E63' },
-  { id: 'edit_income', label: 'Chỉnh sửa >', icon: 'edit', color: '#607D8B' },
+  { id: 'allowance', label: 'Tiền phụ cấp', icon: 'local-grocery-store', color: '#4CAF50' },
+  { id: 'bonus', label: 'Tiền thưởng', icon: 'card-giftcard', color: '#4CAF50' },
+  { id: 'side_income', label: 'Thu nhập phụ', icon: 'account-balance', color: '#4CAF50' },
+  { id: 'investment', label: 'Đầu tư', icon: 'trending-up', color: '#4CAF50' },
+  { id: 'other_income', label: 'Thu nhập tạm...', icon: 'group', color: '#4CAF50' },
+  { id: 'edit_income', label: 'Chỉnh sửa >', icon: 'edit', color: '#4CAF50' },
 ];
 
 // Danh mục tiền chi (50-30-20)
@@ -28,7 +27,7 @@ export const expenseCategories = {
     { id: 'transport', label: 'Đi lại', icon: 'train' },
     { id: 'medical', label: 'Y tế', icon: 'medical-services' },
     { id: 'communication', label: 'Phí liên lạc', icon: 'phone' },
-    { id: 'shopping', label: 'Chi tiêu ', icon: 'local-grocery-store' },
+    { id: 'shopping', label: 'Chi tiêu', icon: 'local-grocery-store' },
   ],
   wants: [
     { id: 'clothing', label: 'Quần áo', icon: 'checkroom' },

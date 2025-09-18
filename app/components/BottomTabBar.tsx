@@ -10,33 +10,72 @@ import Icon from "react-native-vector-icons/MaterialIcons";
 
 type Props = {
   onTabPress?: (tab: string) => void;
+  activeTab?: string;
 };
 
-const BottomTabBar: React.FC<Props> = ({ onTabPress }) => {
+const BottomTabBar: React.FC<Props> = ({ onTabPress, activeTab }) => {
+  const isActive = (tab: string) => activeTab === tab;
+
   return (
     <View style={styles.container}>
       {/* Tab 1: Nhập vào */}
-      <TouchableOpacity style={styles.tabItem} onPress={() => onTabPress?.("home")}>
-        <Icon name="edit" size={24} color="#FF9800" />
-        <Text style={[styles.tabText, { color: "#FF9800" }]}>Nhập vào</Text>
+      <TouchableOpacity
+        style={styles.tabItem}
+        onPress={() => onTabPress?.("home")}
+      >
+        <Icon
+          name="edit"
+          size={24}
+          color={isActive("home") ? "#4CAF50" : "#666"}
+        />
+        <Text style={[styles.tabText, { color: isActive("home") ? "#4CAF50" : "#666" }]}>
+          Nhập vào
+        </Text>
       </TouchableOpacity>
 
       {/* Tab 2: Lịch */}
-      <TouchableOpacity style={styles.tabItem} onPress={() => onTabPress?.("calendar")}>
-        <Icon name="calendar-today" size={24} color="#666" />
-        <Text style={styles.tabText}>Lịch</Text>
+      <TouchableOpacity
+        style={styles.tabItem}
+        onPress={() => onTabPress?.("calendar")}
+      >
+        <Icon
+          name="calendar-today"
+          size={24}
+          color={isActive("calendar") ? "#4CAF50" : "#666"}
+        />
+        <Text style={[styles.tabText, { color: isActive("calendar") ? "#4CAF50" : "#666" }]}>
+          Lịch
+        </Text>
       </TouchableOpacity>
 
       {/* Tab 3: Báo cáo */}
-      <TouchableOpacity style={styles.tabItem} onPress={() => onTabPress?.("stats")}>
-        <Icon name="pie-chart" size={24} color="#666" />
-        <Text style={styles.tabText}>Báo cáo</Text>
+      <TouchableOpacity
+        style={styles.tabItem}
+        onPress={() => onTabPress?.("stats")}
+      >
+        <Icon
+          name="pie-chart"
+          size={24}
+          color={isActive("stats") ? "#4CAF50" : "#666"}
+        />
+        <Text style={[styles.tabText, { color: isActive("stats") ? "#4CAF50" : "#666" }]}>
+          Báo cáo
+        </Text>
       </TouchableOpacity>
 
       {/* Tab 4: Khác */}
-      <TouchableOpacity style={styles.tabItem} onPress={() => onTabPress?.("settings")}>
-        <Icon name="more-horiz" size={24} color="#666" />
-        <Text style={styles.tabText}>Khác</Text>
+      <TouchableOpacity
+        style={styles.tabItem}
+        onPress={() => onTabPress?.("settings")}
+      >
+        <Icon
+          name="more-horiz"
+          size={24}
+          color={isActive("settings") ? "#4CAF50" : "#666"}
+        />
+        <Text style={[styles.tabText, { color: isActive("settings") ? "#4CAF50" : "#666" }]}>
+          Khác
+        </Text>
       </TouchableOpacity>
     </View>
   );
@@ -57,8 +96,8 @@ const styles = StyleSheet.create({
     shadowRadius: 4,
     elevation: 5,
 
-    position: "absolute",   // giữ cố định
-    bottom: 0,              // dính sát mép dưới
+    position: "absolute",
+    bottom: 0,
     left: 0,
     right: 0,
   },

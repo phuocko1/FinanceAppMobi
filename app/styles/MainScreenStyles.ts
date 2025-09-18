@@ -28,8 +28,8 @@ const MainScreenStyles = StyleSheet.create({
     borderWidth: 1,
   },
   tabActive: {
-    backgroundColor: '#FF9800',
-    borderColor: '#FF9800',
+    backgroundColor: '#4CAF50', // đổi từ cam sang xanh lá
+    borderColor: '#4CAF50',
   },
   tabInactive: {
     backgroundColor: '#f5f5f5',
@@ -119,8 +119,8 @@ const MainScreenStyles = StyleSheet.create({
     backgroundColor: '#fff',
   },
   selectedCategory: {
-    borderColor: '#FF9800',
-    backgroundColor: '#FFF8E1',
+    borderColor: '#4CAF50', // đổi từ cam sang xanh lá
+    backgroundColor: '#E8F5E9', // xanh lá nhạt thay vì #FFF8E1
   },
   categoryLabel: {
     fontSize: scale(14),
@@ -131,7 +131,7 @@ const MainScreenStyles = StyleSheet.create({
   },
   submitButton: {
     marginTop: scale(30),
-    backgroundColor: '#FF9800',
+    backgroundColor: '#4CAF50', // đổi từ cam sang xanh lá
     padding: scale(16),
     borderRadius: scale(12),
     alignItems: 'center',

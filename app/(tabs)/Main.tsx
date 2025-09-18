@@ -1,5 +1,5 @@
 // src/screens/Main.tsx
-import { useLocalSearchParams } from 'expo-router'; // ✅ thay thế cho route.params
+import { useLocalSearchParams } from 'expo-router';
 import React, { useState } from 'react';
 import {
   ScrollView,
@@ -23,6 +23,9 @@ import {
 import BottomBar from '../components/BottomTabBar';
 import MainScreenStyles from '../styles/MainScreenStyles';
 
+// ✅ Thêm import router và usePathname
+import { router, usePathname } from 'expo-router';
+
 const Main = () => {
   const { initialBalance } = useLocalSearchParams<{ initialBalance?: string }>();
 
@@ -33,8 +36,6 @@ const Main = () => {
   const [activeTab, setActiveTab] = useState<'needs' | 'wants' | 'save'>('needs');
   const [currentDate, setCurrentDate] = useState(new Date());
   const [balance, setBalance] = useState<number>(0);
-
-
 
   const handleChangeAmount = (val: string) => {
     const formatted = formatNumber(val);
@@ -52,12 +53,18 @@ const Main = () => {
 
   const currentCategories = expenseCategories[activeTab];
 
+  // ✅ Xác định tab đang active
+  const pathname = usePathname();
+  const getActiveTab = () => {
+    if (pathname === '/calendar') return 'calendar';
+    if (pathname === '/stats') return 'stats';
+    if (pathname === '/settings') return 'settings';
+    return 'home'; // mặc định là home khi ở '/'
+  };
+
   return (
-    <View style={{ flex: 1 , paddingTop :10}}>
+    <View style={{ flex: 1, paddingTop: 10 }}>
       <ScrollView style={MainScreenStyles.container}>
-        {/* Header: Hiển thị số dư ban đầu */}
-
-
         {/* Tiêu đề: Tiền chi / Tiền thu */}
         <View style={[MainScreenStyles.header, { marginTop: 10 }]}>
           <TouchableOpacity
@@ -106,14 +113,14 @@ const Main = () => {
               onPress={() => setCurrentDate(goToPreviousDay(currentDate))}
               style={MainScreenStyles.arrowButton}
             >
-              <Icon name="chevron-left" size={24} color="#FF9800" />
+              <Icon name="chevron-left" size={24} color="#4CAF50" />
             </TouchableOpacity>
             <Text style={MainScreenStyles.dateText}>{formatDay(currentDate)}</Text>
             <TouchableOpacity
               onPress={() => setCurrentDate(goToNextDay(currentDate))}
               style={MainScreenStyles.arrowButton}
             >
-              <Icon name="chevron-right" size={24} color="#FF9800" />
+              <Icon name="chevron-right" size={24} color="#4CAF50" />
             </TouchableOpacity>
           </View>
         </View>
@@ -214,7 +221,7 @@ const Main = () => {
                     ]}
                     onPress={() => handleCategoryPress(cat.id, setSelectedCategory)}
                   >
-                    <Icon name={cat.icon} size={24} color="#FF9800" />
+                    <Icon name={cat.icon} size={24} color="#4CAF50" />
                     <Text style={MainScreenStyles.categoryLabel}>{cat.label}</Text>
                   </TouchableOpacity>
                 ))}
@@ -231,13 +238,26 @@ const Main = () => {
         </TouchableOpacity>
       </ScrollView>
 
-      {/* Bottom bar */}
+      {/* ✅ Bottom bar - đã sửa để điều hướng và highlight */}
       <BottomBar
+        activeTab={getActiveTab()}
         onTabPress={(tab) => {
-          if (tab === 'home') alert('Trang chủ');
-          if (tab === 'calendar') alert('Mở lịch');
-          if (tab === 'stats') alert('Mở thống kê');
-          if (tab === 'settings') alert('Mở cài đặt');
+          switch (tab) {
+            case 'home':
+              router.push('/');
+              break;
+            case 'calendar':
+              router.push('/CalendarScreen');
+              break;
+            case 'stats':
+              router.push('/StatsScreen');
+              break;
+            case 'settings':
+              router.push('/SettingsScreen');
+              break;
+            default:
+              break;
+          }
         }}
       />
     </View>
